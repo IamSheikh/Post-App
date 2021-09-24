@@ -18,8 +18,22 @@ app.use(express.json());
 app.set("view engine", "ejs");
 
 app.get("/", (req, res) => {
-  res.render("index");
+  const posts = [
+    {
+      username: "Sheikh Taha Jameel",
+      title: "Sample Post",
+      description: "Sample Post",
+    },
+    {
+      username: "Taha Jameel",
+      title: "Sample Post 2",
+      description: "Sample Post 2",
+    },
+  ];
+  res.render("index", { posts: posts });
 });
+
+app.use("/", require("./routes/posts"));
 
 const PORT = 3000;
 app.listen(PORT, () =>
