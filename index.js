@@ -1,6 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
+const post = require("./models/post");
 const app = express();
 
 const connectDB = async () => {
@@ -16,19 +17,8 @@ connectDB();
 
 app.set("view engine", "ejs");
 
-app.get("/", (req, res) => {
-  const posts = [
-    {
-      username: "Sheikh Taha Jameel",
-      title: "Sample Post",
-      description: "Sample Post",
-    },
-    {
-      username: "Taha Jameel",
-      title: "Sample Post 2",
-      description: "Sample Post 2",
-    },
-  ];
+app.get("/", async (req, res) => {
+  const posts = await post.find();
   res.render("index", { posts: posts });
 });
 

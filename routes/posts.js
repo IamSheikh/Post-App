@@ -12,12 +12,6 @@ router.get("/new", (req, res) => {
   res.render("new", { post: new post() });
 });
 
-router.get("/:id", async (req, res) => {
-  const posts = await post.findById(req.params.id);
-  if (posts == null) res.redirect("/");
-  res.render("show", { post: posts });
-});
-
 router.post("/post", async (req, res) => {
   try {
     const { username, title, description } = req.body;
@@ -27,7 +21,7 @@ router.post("/post", async (req, res) => {
       description: description,
     });
     await newPost.save();
-    res.redirect(`/${newPost.id}`);
+    res.redirect("/");
   } catch (err) {
     console.log(err);
   }
