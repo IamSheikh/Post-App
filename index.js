@@ -14,8 +14,11 @@ const connectDB = async () => {
 
 connectDB();
 
+app.use(express.json());
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.render("index");
 });
 
 const PORT = 3000;
